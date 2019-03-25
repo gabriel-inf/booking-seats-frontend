@@ -7,6 +7,7 @@ export class Reservation {
     seat: string;
     confirmed: boolean;
     value: string;
+    email: string;
   
     constructor() { 
       this.id = null;
@@ -16,6 +17,7 @@ export class Reservation {
       this.seat = "0";
       this.confirmed = false;
       this.value = "0";
+      this.email = "";
     }
 
 }

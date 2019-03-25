@@ -5,10 +5,15 @@
   <mat-card class="card">
 
     <h2>
-      Vingadores: Ultimato
+      <i class="material-icons">
+        event_seat
+        </i> Vingadores: Ultimato
     </h2>
     <h3>
-      dia 27/04 de 2018
+      <i class="material-icons">
+        location_on
+        </i>
+        dia 27/04/19 às 9am
     </h3>
 
     <form (ngSubmit)="onSubmit(reservationForm)" #reservationForm="ngForm">
@@ -26,6 +31,10 @@
           <input matInput placeholder="Telefone" mask="(00) 00000-0000" #cpfPhone [(ngModel)]="reservation.phone" name='phone'>
         </mat-form-field>
 
+        <mat-form-field>
+          <input matInput placeholder="Email" #email [(ngModel)]="reservation.email" name='email'>
+        </mat-form-field>
+
 
         <mat-form-field >
           <mat-select placeholder="Valor" [(value)]="reservation.value">
@@ -35,7 +44,7 @@
         </mat-form-field>
 
         <div class="example-button-row">
-          <button type="submit" class="but" mat-flat-button color="accent">Reservar!</button>
+          <button type="submit" class="but" mat-flat-button color="accent">Escolher lugar!</button>
         </div>
 
       </div>

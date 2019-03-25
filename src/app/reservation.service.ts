@@ -12,14 +12,19 @@ export class ReservationService {
     private apiService: ApiService
   ) { }
 
-  pickReservation() {
-    console.log(this.dataService.reservation)
-    this.apiService.pick(this.dataService.reservation)
+  async pickReservation(seat: string) {
+    await this.dataService.setSeat(seat)
+    this.apiService.pick(this.dataService.reservation).subscribe(res => {
+      console.log(res)
+    }, err => {
+      console.log(err)
+    });
   }
 
-  submitReservation() {
-    console.log(this.dataService.reservation)
-    this.apiService.confirm(this.dataService.reservation)
+  async submitReservation() {
+    this.apiService.confirm(this.dataService.reservation).subscribe(res => {
+      console.log(res);
+    }, err => console.log(err));
   }
 
   

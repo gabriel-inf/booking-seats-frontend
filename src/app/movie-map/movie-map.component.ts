@@ -174,9 +174,7 @@ export class MovieMapComponent implements OnInit {
       this.cart.selectedSeats.push(seatObject.seatLabel);
       this.cart.seatstoStore.push(seatObject.key);
       this.cart.totalamount += seatObject.price;
-      this.data.setSeat(seatObject.seatLabel)
-      console.log(this.data.reservation)
-      this.reservationService.pickReservation();
+      this.reservationService.pickReservation(seatObject.seatLabel);
     }
     else if( seatObject.status = "booked" )
     {
@@ -226,6 +224,7 @@ export class MovieMapComponent implements OnInit {
 
   processBooking(){
     this.reservationService.submitReservation();
+    this.dialog.closeAll();
   }
 
 }
