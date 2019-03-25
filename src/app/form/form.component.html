@@ -1,0 +1,45 @@
+<div class="image">
+</div>
+
+<div class="back">
+  <mat-card class="card">
+
+    <h2>
+      Vingadores: Ultimato
+    </h2>
+    <h3>
+      dia 27/04 de 2018
+    </h3>
+
+    <form (ngSubmit)="onSubmit(reservationForm)" #reservationForm="ngForm">
+      <div class="example-container">
+        <mat-form-field>
+          <input matInput placeholder="Nome" 
+            #nameField [(ngModel)]="reservation.name" name='name'>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="CPF" mask="000.000.000-00" #cpfField [(ngModel)]="reservation.cpf" name='cpf'>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Telefone" mask="(00) 00000-0000" #cpfPhone [(ngModel)]="reservation.phone" name='phone'>
+        </mat-form-field>
+
+
+        <mat-form-field >
+          <mat-select placeholder="Valor" [(value)]="reservation.value">
+            <mat-option value="15">R$15</mat-option>
+            <mat-option value="20">R$20</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="example-button-row">
+          <button type="submit" class="but" mat-flat-button color="accent">Reservar!</button>
+        </div>
+
+      </div>
+    </form>
+
+  </mat-card>
+</div>

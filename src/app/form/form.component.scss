@@ -1,0 +1,42 @@
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  
+
+
+  mat-card {
+    width: 350px;
+    height: 400px;
+    display: block;
+    margin-left:auto;
+    margin-right:auto;  
+    vertical-align:middle;
+}
+
+.but {
+    width: 100%;
+}
+
+.image{
+    height:10em; 
+    background-size:cover;
+    width:auto;
+    background-image:url('https://wallpapersite.com/images/wallpapers/avengers-endgame-3203x1872-avengers-4-hd-16872.jpg');
+    background-position:50% 50%;
+  }
+
+  .back {
+    width: 100%;
+    height: 1000px;
+    background-color: #2f2f2f;
+}
+
+
+
+  
