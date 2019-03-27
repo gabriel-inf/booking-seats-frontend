@@ -12,7 +12,22 @@ import { ReservationService } from '../reservation.service';
 export class MovieMapComponent implements OnInit {
 
   private seatConfig: any = null;
-  private seatmap = [];
+  public seatmap = [];
+  public unavailable = [];
+
+  processLocked() {
+    this.seatmap.forEach(line => {
+      line["seats"].forEach(seat => {
+        this.unavailable.forEach(unavailable_seat => {
+          if (seat["seatLabel"] == unavailable_seat) {
+            seat["status"] = "unavailable";
+            console.log("locked", seat)
+          }
+        });
+        
+      });
+    });
+  }
 
   private seatChartConfig = {
     showRowsLabel: true,
@@ -20,7 +35,7 @@ export class MovieMapComponent implements OnInit {
     newSeatNoForRow: true
   }
 
-  private cart = {
+  public cart = {
     selectedSeats: [],
     seatstoStore: [],
     totalamount: 0,
@@ -34,16 +49,17 @@ export class MovieMapComponent implements OnInit {
     private dialogRef: MatDialogRef<MovieMapComponent>,
     public dialog: MatDialog, 
     private data: DataService,
-    private reservationService: ReservationService) { }
+    private reservationService: ReservationService,
+    private api: ApiService) { }
 
 
   closeDialog() {
     this.dialogRef.close();
   }
-  ngOnInit() {
+  async ngOnInit() {
     this.seatConfig = [
       {
-        "seat_price": 250,
+        "seat_price": 15,
         "seat_map": [
           {
             "seat_label": "L",
@@ -95,8 +111,14 @@ export class MovieMapComponent implements OnInit {
           }
         ]
       }
-    ]    
-    this.processSeatChart(this.seatConfig);
+    ]   
+    await this.api.getLockedSeats().subscribe(res => {
+      this.unavailable = res;
+      console.log("Unavailable (api)", res);
+      this.processSeatChart(this.seatConfig);
+      this.processLocked();
+    });
+  
   }
 
   public processSeatChart ( map_data : any[] )
@@ -135,6 +157,7 @@ export class MovieMapComponent implements OnInit {
             }
             var totalItemCounter = 1;
             seatValArr.forEach(item => {
+              
               var seatObj = {
                 "key" : map_element.seat_label+"_"+totalItemCounter,
                 "price" : map_data[__counter]["seat_price"],
