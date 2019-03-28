@@ -11,8 +11,8 @@ import { DataService } from './data.service';
 })
 export class ApiService {
 
-  server = "https://vingadores-ultimato.herokuapp.com"
-
+  //server = "https://vingadores-ultimato.herokuapp.com"
+  server = "http://localhost:8080"
 
   constructor(private http: HttpClient,
   ) { }
@@ -23,9 +23,8 @@ export class ApiService {
     console.log(path);
     return this.http.get<Array<String>>(path);
   }
-  ReservationService
-  public pick(booking: Reservation) {
 
+  public pick(booking: Reservation) {
     let path = this.server + "/movie/pick";
     console.log(path);
     console.log(booking)

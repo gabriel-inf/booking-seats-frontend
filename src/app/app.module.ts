@@ -54,12 +54,14 @@ import {
 import { FormComponent } from './form/form.component';
 import { FormsModule } from '@angular/forms';
 import { MovieMapComponent } from './movie-map/movie-map.component';
+import { SucessoComponent } from './sucesso/sucesso.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
-    MovieMapComponent
+    MovieMapComponent,
+    SucessoComponent
   ],
   imports: [
     BrowserModule,
@@ -113,6 +115,6 @@ import { MovieMapComponent } from './movie-map/movie-map.component';
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
     { provide: MatDialogRef, useValue: { hasBackdrop: false } }],
   bootstrap: [AppComponent],
-  entryComponents: [MovieMapComponent]
+  entryComponents: [MovieMapComponent, SucessoComponent]
 })
 export class AppModule { }

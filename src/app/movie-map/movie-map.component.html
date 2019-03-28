@@ -9,12 +9,13 @@
         <div class="seat-item seat-space" style="color:white ; background-color:white" *ngIf="seatobj.seatLabel == ''">
           &nbsp; </div>
         <div placement="top" [ngClass]="{ 'seat-item' : true , 'seat-available' : seatobj.status == 'available' ,'seat-booked' : seatobj.status == 'booked' ,'seat-unavailable' : seatobj.status == 'unavailable' }"
-          (click)="selectSeat(seatobj)" *ngIf="(seatobj.status == 'available' || seatobj.status == 'booked' )&& seatobj.seatLabel != ''">{{seatobj.seatNo}}</div>
+          (click)="selectSeat(seatobj)" *ngIf="(seatobj.status == 'available' || seatobj.status == 'booked' )&& seatobj.seatLabel != ''">{{seatobj.seatLabel}}</div>
 
-        <div placement="top" [ngClass]="{ 'seat-item' : true , 'seat-unavailable' : true }" *ngIf="seatobj.status == 'unavailable' && seatobj.seatLabel != ''">{{seatobj.seatNo}}</div>
+        <div placement="top" [ngClass]="{ 'seat-item' : true , 'seat-unavailable' : true }" *ngIf="seatobj.status == 'unavailable' && seatobj.seatLabel != ''">{{seatobj.seatLabel}}</div>
       </div>
     </div>
   </div>
+  <div style="text-align: center; vertical-align: middle; line-height: 90px; ">TELA</div>
 </div>
 <!-- *ngIf="cart?.selectedSeats?.length > 0" -->
 <div class="container">

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Reservation } from '../reservation';
-import { ApiService } from '../api.service';
 import { DataService } from '../data.service';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { MovieMapComponent } from '../movie-map/movie-map.component';
 import { ReservationService } from '../reservation.service';
 
@@ -24,18 +23,27 @@ export class FormComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(form) {
+  async onSubmit(form) {
 
-    this.dataService.reservation = this.reservation;
-    let dialogRef = this.dialog.open(MovieMapComponent, {
-      width: '600px'
-    });
-    dialogRef.updatePosition();
-
-
-
+    if (this.reservation.cpf != "" && this.reservation.email != "" && this.reservation.name != ""
+          && this.reservation.phone != "" && this.reservation.seat != "" && this.reservation.value != "") {
+            this.dataService.reservation = this.reservation;
+            let dialogRef = await this.dialog.open(MovieMapComponent, {
+              width: '800px'
+            });
+            dialogRef.updatePosition();
+          } else {
+            alert("Informe todos os dados =)")
+          }
   }
 
-
+  clearReservation() {
+    this.reservation.cpf = "";
+    this.reservation.email = "";
+    this.reservation.name = "";
+    this.reservation.phone = "";
+    this.reservation.seat = ""; 
+    this.reservation.value = "";
+  }
 
 }

@@ -1,0 +1,11 @@
+<p>
+  Hey {{this.dataService.reservation.name}}, na paz? <br> 
+  Obrigado, esse dia vai ser demais! <br>
+  Vamos entrar em contato no teu e-mail para confirmar o pagamento!
+</p>
+
+  <h2>Cadeira: {{this.dataService.reservation.seat}}</h2>
+  Grave isso!
+  <br>
+
+<button  [disabled]="cart?.selectedSeats?.length == 0" (click)="reload()" type="submit" class="but" mat-flat-button color="accent">Pronto!</button>
