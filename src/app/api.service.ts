@@ -11,8 +11,8 @@ import { DataService } from './data.service';
 })
 export class ApiService {
 
-  //server = "https://vingadores-ultimato.herokuapp.com"
-  server = "http://localhost:8080"
+  server = "https://vingadores-ultimato.herokuapp.com"
+  // server = "http://localhost:8080"
 
   constructor(private http: HttpClient,
   ) { }
