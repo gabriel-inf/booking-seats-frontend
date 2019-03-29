@@ -68,63 +68,63 @@ export class MovieMapComponent implements OnInit {
         "seat_map": [
           {
             "seat_label": "Q",
-            "layout": "ggg__ggggggggggggggg__ggg"
+            "layout": "ggggggggggg   gggggggggggg"
           },
           {
             "seat_label": "P",
-            "layout": "ggg__ggggggggggggggg__ggg"
+            "layout": "ggg__gggggggggggggggg__ggg"
           },
           {
             "seat_label": "O",
-            "layout": "ggg__ggggggggggggggg__ggg"
+            "layout": "ggg__gggggggggggggggg__ggg"
           },
           {
             "seat_label": "N",
-            "layout": "ggg__ggggggggggggggg__ggg"
+            "layout": "ggg__gggggggggggggggg__ggg"
           },
           {
             "seat_label": "M",
-            "layout": "ggg__ggggggggggggggg__ggg"
+            "layout": "ggg__gggggggggggggggg__ggg"
           },
           {
             "seat_label": "L",
-            "layout": "ggg__ggggggggggggggg__ggg"
+            "layout": "ggg__gggggggggggggggg__ggg"
           },
           {
             "seat_label": "K",
-            "layout": "ggg__ggggggggggggggg_____"
+            "layout": "ggg__gggggggggggggggg_____"
           },
           {
             "seat_label": "J",
-            "layout": "ggg__ggggggggggggggg_____"
+            "layout": "ggg__gggggggggggggggg_____"
           },
           {
             "seat_label": "I",
-            "layout": "_____ggggggggggggggg_____"
+            "layout": "...__gggggggggggggggg_____"
           },
           {
             "seat_label": "H",
-            "layout": "_____ggggggggggggggg_____"
+            "layout": "...__gggggggggggggggg_____"
           },
           {
             "seat_label": "G",
-            "layout": "_____ggggggggggggggg__ggg"
+            "layout": "...__gggggggggggggggg__ggg"
           },
           {
             "seat_label": "F",
-            "layout": "_____ggggggggggggggg__ggg"
+            "layout": "...__gggggggggggggggg__ggg"
           },
           {
             "seat_label": "E",
-            "layout": "_____ggggggggggggggg__ggg"
+            "layout": "...__gggggggggggggggg__ggg"
           },
           {
             "seat_label": "D",
-            "layout": "_____ggggggggggggggg__ggg"
+            "layout": "...__gggggggggggggggg__ggg"
           },
           {
             "seat_label": "C",
-            "layout": "_______ggggggggggg_____gg"
+            "layout": "...____gggggggggggg.____gg"
           },
           {
             "seat_label": "B",
@@ -184,16 +184,30 @@ export class MovieMapComponent implements OnInit {
               "status": "available"
             };
 
-            if (item != '_') {
+            if (item == 'g') {
+
+              if (map_element.seat_label == "C" && (seatNoCounter == 6)){
+                seatNoCounter++;
+              }
+              if (map_element.seat_label == "C" && (seatNoCounter == 11)){
+                seatNoCounter++;
+                seatNoCounter++;
+              }
+              if (map_element.seat_label == "C" && (seatNoCounter == 17)){
+                seatNoCounter++;
+              }
+
               seatObj["seatLabel"] = map_element.seat_label + seatNoCounter;
               if (seatNoCounter < 10) { seatObj["seatNo"] = "0" + seatNoCounter; }
               else { seatObj["seatNo"] = "" + seatNoCounter; }
 
               seatNoCounter++;
             }
-            else {
+            else if (item == "."){
               seatObj["seatLabel"] = "";
               seatNoCounter++;
+            } else {
+              seatObj["seatLabel"] = "";
             }
             totalItemCounter++;
             mapObj["seats"].push(seatObj);
