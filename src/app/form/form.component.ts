@@ -26,14 +26,14 @@ export class FormComponent implements OnInit {
   async onSubmit(form) {
 
     if (this.reservation.cpf != "" && this.reservation.email != "" && this.reservation.name != ""
-          && this.reservation.phone != "" && this.reservation.seat != "" && this.reservation.value != "") {
+          && this.reservation.phone != "" && this.reservation.seat != "" && this.reservation.value != "" && this.reservation.cpf.length == 11 && this.reservation.phone.length == 11) {
             this.dataService.reservation = this.reservation;
             let dialogRef = await this.dialog.open(MovieMapComponent, {
               width: '800px'
             });
             dialogRef.updatePosition();
           } else {
-            alert("Informe todos os dados =)")
+            alert("Informe todos os dados completos =)")
           }
   }
 
