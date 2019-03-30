@@ -4,6 +4,8 @@ import { DataService } from '../data.service';
 import { ApiService } from '../api.service';
 import { ReservationService } from '../reservation.service';
 import { SucessoComponent } from '../sucesso/sucesso.component';
+import { interval, Observable } from 'rxjs';
+import { reference } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-movie-map',
@@ -14,7 +16,10 @@ export class MovieMapComponent implements OnInit {
 
   private seatConfig: any = null;
   public seatmap = [];
-  public unavailable = [];
+  public unavailable: any;
+  private selectedSeat;
+
+  
 
   processLocked() {
 
@@ -30,6 +35,9 @@ export class MovieMapComponent implements OnInit {
         if (found) {
           seat['status'] = "unavailable"
         } else seat['status'] = "available"
+        if (seat["seatLabel"] == this.selectedSeat) {
+          seat["status"] = "booked";
+        }  
       });
     });
   }
@@ -50,18 +58,45 @@ export class MovieMapComponent implements OnInit {
 
   title = 'seat-chart-generator';
 
+
+
   constructor(
     private dialogRef: MatDialogRef<MovieMapComponent>,
     public dialog: MatDialog,
     private data: DataService,
     private reservationService: ReservationService,
-    private api: ApiService) { }
+    private api: ApiService) { 
+
+      this.refresh()
+
+    }
 
 
   closeDialog() {
     this.dialogRef.close();
+    
   }
+
+
+  refresh() {
+    const observervable: Observable<number> = interval(5000);
+    
+    observervable.subscribe(_ => {
+      this.api.getLockedSeats().subscribe(res => {
+        console.log(res);
+        this.unavailable = res;
+        // this.seatmap = []
+        // this.processSeatChart(this.seatConfig);
+        this.processLocked();
+      })
+    })
+  }
+
   async ngOnInit() {
+
+
+    
+
     this.seatConfig = [
       {
         "seat_price": 15,
@@ -221,10 +256,10 @@ export class MovieMapComponent implements OnInit {
 
   public selectSeat(seatObject: any) {
     console.log("Seat to block: ", seatObject);
-
+    
     if (seatObject.status == "available") {
       this.api.getLockedSeats().subscribe(lkSeats => {
-        this.blockSeats = lkSeats;
+        //this.unavailable = lkSeats;
         this.processLocked();
         console.log(lkSeats)
         lkSeats.forEach(element => {
@@ -233,11 +268,23 @@ export class MovieMapComponent implements OnInit {
           }
         });
         if (seatObject.seatLabel != "unavailable") {
+
+          if (this.selectedSeat != null) {
+            this.seatmap.forEach(seat => {
+              if (seat.status == this.selectedSeat) {
+                seat.status = "available"
+              }
+              
+            });
+          }
+
+
+          this.selectedSeat = seatObject.seatLabel;
           seatObject.status = "booked";
           this.cart.selectedSeats.push(seatObject.seatLabel);
           this.cart.seatstoStore.push(seatObject.key);
           this.cart.totalamount += seatObject.price;
-          this.reservationService.pickReservation(seatObject.seatLabel);
+          this.reservationService.pickReservation(seatObject.seatLabel)
         }
       });
     }
@@ -297,5 +344,7 @@ export class MovieMapComponent implements OnInit {
     }
 
   }
+
+  
 
 }

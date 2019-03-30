@@ -9,6 +9,8 @@ import { DataService } from './data.service';
 import { MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { TooltipModule } from 'ngx-bootstrap';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { Routes, RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 
 
@@ -55,13 +57,15 @@ import { FormComponent } from './form/form.component';
 import { FormsModule } from '@angular/forms';
 import { MovieMapComponent } from './movie-map/movie-map.component';
 import { SucessoComponent } from './sucesso/sucesso.component';
+import { ViewReservationsComponent } from './view-reservations/view-reservations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     MovieMapComponent,
-    SucessoComponent
+    SucessoComponent,
+    ViewReservationsComponent
   ],
   imports: [
     BrowserModule,
@@ -108,6 +112,7 @@ import { SucessoComponent } from './sucesso/sucesso.component';
     FormsModule,
     TooltipModule.forRoot(),
     NgbModule,  
+    AppRoutingModule
 
 
   ],

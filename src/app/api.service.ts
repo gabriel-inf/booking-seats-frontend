@@ -16,25 +16,26 @@ export class ApiService {
 
   constructor(private http: HttpClient,
   ) { }
-
+  dataSource
   public getLockedSeats(): Observable<any> {
 
     let path = this.server + "/movie/lockedSeats";
-    console.log(path);
     return this.http.get<Array<String>>(path);
   }
 
   public pick(booking: Reservation) {
     let path = this.server + "/movie/pick";
-    console.log(path);
-    console.log(booking)
     return this.http.put(path, booking);
   }
 
   public confirm(booking: Reservation) {
     let path = this.server + "/movie/confirm"
-    console.log(path);
     return this.http.put(path, booking);
+  }
+
+  public getAllReservations() {
+    let path = this.server + "/movie/movieState"
+    return this.http.get(path);
   }
 
 

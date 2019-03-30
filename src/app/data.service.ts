@@ -9,10 +9,11 @@ export class DataService {
 
 
   reservation: Reservation;
-  locked_seats: any = [];
+  locked_seats: any [];
 
   constructor(private apiService: ApiService) {
     // this.loadLockedSeats();
+    this.reservation = new Reservation();
   }
 
   loadLockedSeats() {
