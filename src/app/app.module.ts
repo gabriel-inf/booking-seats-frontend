@@ -10,7 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { TooltipModule } from 'ngx-bootstrap';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Routes, RouterModule } from '@angular/router';
-import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
