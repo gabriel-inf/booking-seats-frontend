@@ -38,6 +38,10 @@ export class ApiService {
     return this.http.get(path);
   }
 
+  public getCpfUsage(cpf: string) {
+    let path = this.server + "/movie/checkCpfUsage/" + cpf
+    return this.http.get(path);
+  }
 
 
   

@@ -15,14 +15,12 @@ export class ReservationService {
   async pickReservation (seat: string) {
     await this.dataService.setSeat(seat)
     this.apiService.pick(this.dataService.reservation).subscribe(res => {
-      console.log(res)
+      //console.log(res)
       return 0
     }, err => {
       console.log(err)
       if (err.error.message == "SEAT_UNAVAILABLE") {
         alert("Desculpe, essa cadeira não está disponivel!");
-      } else {
-        alert("Ocorreu um erro!");
       }
       return 1
     }); 

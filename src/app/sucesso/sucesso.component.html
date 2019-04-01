@@ -1,11 +1,15 @@
-<p>
-  Hey {{this.dataService.reservation.name}}, na paz? <br> 
-  Obrigado, esse dia vai ser demais! <br>
-  Vamos entrar em contato no teu e-mail para confirmar o pagamento!
-</p>
+<mat-dialog-content>
+  <p>
+    Hey {{this.dataService.reservation.name}}, na paz? <br>
+    Obrigado, esse dia vai ser demais! <br>
+    Vamos entrar em contato no teu e-mail para confirmar o pagamento!
+  </p>
 
   <h2>Cadeira: {{this.dataService.reservation.seat}}</h2>
   Grave isso!
-  <br>
+</mat-dialog-content>
 
-<button  [disabled]="cart?.selectedSeats?.length == 0" (click)="reload()" type="submit" class="but" mat-flat-button color="accent">Pronto!</button>
+<mat-dialog-actions>
+ <button style="width: 100%;" [disabled]="cart?.selectedSeats?.length == 0" (click)="reload()" type="submit" class="but" mat-flat-button
+  color="accent">Pronto!</button> 
+</mat-dialog-actions>

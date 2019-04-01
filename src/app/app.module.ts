@@ -58,6 +58,7 @@ import { FormsModule } from '@angular/forms';
 import { MovieMapComponent } from './movie-map/movie-map.component';
 import { SucessoComponent } from './sucesso/sucesso.component';
 import { ViewReservationsComponent } from './view-reservations/view-reservations.component';
+import { CpfWarnningComponent } from './cpf-warnning/cpf-warnning.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ViewReservationsComponent } from './view-reservations/view-reservations
     FormComponent,
     MovieMapComponent,
     SucessoComponent,
-    ViewReservationsComponent
+    ViewReservationsComponent,
+    CpfWarnningComponent
   ],
   imports: [
     BrowserModule,
@@ -120,6 +122,6 @@ import { ViewReservationsComponent } from './view-reservations/view-reservations
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: true } },
     { provide: MatDialogRef, useValue: { hasBackdrop: false } }],
   bootstrap: [AppComponent],
-  entryComponents: [MovieMapComponent, SucessoComponent]
+  entryComponents: [MovieMapComponent, SucessoComponent, CpfWarnningComponent]
 })
 export class AppModule { }

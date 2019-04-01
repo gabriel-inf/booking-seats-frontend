@@ -29,7 +29,6 @@ export class MovieMapComponent implements OnInit {
         this.unavailable.forEach(unavailable_seat => {
           if (seat["seatLabel"] == unavailable_seat) {
             found = true
-            console.log("locked", seat)
           }
         });
         if (found) {
@@ -83,7 +82,6 @@ export class MovieMapComponent implements OnInit {
     
     observervable.subscribe(_ => {
       this.api.getLockedSeats().subscribe(res => {
-        console.log(res);
         this.unavailable = res;
         // this.seatmap = []
         // this.processSeatChart(this.seatConfig);
@@ -174,7 +172,6 @@ export class MovieMapComponent implements OnInit {
     ]
     await this.api.getLockedSeats().subscribe(res => {
       this.unavailable = res;
-      console.log("Unavailable (api)", res);
       this.processSeatChart(this.seatConfig);
       this.processLocked();
     });
@@ -255,13 +252,11 @@ export class MovieMapComponent implements OnInit {
   }
 
   public selectSeat(seatObject: any) {
-    console.log("Seat to block: ", seatObject);
     
     if (seatObject.status == "available") {
       this.api.getLockedSeats().subscribe(lkSeats => {
         //this.unavailable = lkSeats;
         this.processLocked();
-        console.log(lkSeats)
         lkSeats.forEach(element => {
           if (element == seatObject.seatLabel) {
             seatObject.status = "unavailable";
@@ -284,11 +279,27 @@ export class MovieMapComponent implements OnInit {
           this.cart.selectedSeats.push(seatObject.seatLabel);
           this.cart.seatstoStore.push(seatObject.key);
           this.cart.totalamount += seatObject.price;
-          this.reservationService.pickReservation(seatObject.seatLabel)
+          // if (this.reservationService.pickReservation(seatObject.seatLabel) == 1) {
+          //   alert("Ocorreu um erro! Selecione outra cadeira!");
+          //   this.selectedSeat = "";
+          //   this.dialog.closeAll();
+          //   let dialogRef = this.dialog.open(MovieMapComponent, {
+          //     width: '800px'
+          //   });
+          //   dialogRef.updatePosition();
+          // }
+          try {
+            let ret = this.reservationService.pickReservation(seatObject.seatLabel)
+            console.log(ret)
+          } catch (error) {
+            console.log(error)
+          }
+          
+        
         }
       });
     }
-    else if (seatObject.status = "booked") {
+    else if (seatObject.status == "booked") {
       seatObject.status = "available";
       var seatIndex = this.cart.selectedSeats.indexOf(seatObject.seatLabel);
       if (seatIndex > -1) {
@@ -306,17 +317,13 @@ export class MovieMapComponent implements OnInit {
       for (let index = 0; index < seatsToBlockArr.length; index++) {
         var seat = seatsToBlockArr[index] + "";
         var seatSplitArr = seat.split("_");
-        console.log("Split seat: ", seatSplitArr);
         for (let index2 = 0; index2 < this.seatmap.length; index2++) {
           const element = this.seatmap[index2];
           if (element.seatRowLabel == seatSplitArr[0]) {
             var seatObj = element.seats[parseInt(seatSplitArr[1]) - 1];
             if (seatObj) {
-              console.log("\n\n\nFount Seat to block: ", seatObj);
               seatObj["status"] = "unavailable";
               this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1] = seatObj;
-              console.log("\n\n\nSeat Obj", seatObj);
-              console.log(this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1]);
               break;
             }
 
@@ -327,8 +334,6 @@ export class MovieMapComponent implements OnInit {
     }
 
   }
-
-
 
   async processBooking() {
     await this.reservationService.submitReservation();
